@@ -1,4 +1,4 @@
-# EdgeComputing_CP01
+# Computational Thinking with Python
 
 > # Challenge - Sprint 1
 <ul>
