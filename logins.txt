@@ -1,1 +1,2 @@
 -Nome: bia -Sobrenome: tex -Email: biaafarah@gmail.com -senha: Anabia 
+-Nome: bia -Sobrenome: farah -Email: biafarah -senha: anabia 
