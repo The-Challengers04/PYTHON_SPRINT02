@@ -33,15 +33,32 @@ def cadastrarestabelecimento():
     resenha = input ('faça uma resenha sobre seu estabelecimento')
     estabelecimento = open('estabelecimentos.txt','a') #abre um arquivo txt e coloca as informações do estabelecimento
     estabelecimento.write(f'-Nome: {nomeestabelecimento} -cnpj: {cnpj} -localização: {localização} \n')
-
-
+def login():
+    email = input('Digite seu email')
+    senha = input('Digite sua senha')
+    lerlogins = open('logins.txt','r')
+    for linha in lerlogins.readlines():
+        valores = linha.split('-')
+        if email in valores[3] and senha in valores[4]:
+            print('bem vindo')
+        else:
+            print('usuario/senha incorretos')        
 
 
 
 
 print('Seja bem-vindo ao aplicativo Inlui+!')
-criarcadastro()
 while True:
+    cadastrooulogin = int(input('Você é novo por aqui?  Digite 1 para fazer cadastro e 2 para fazer login'))
+    if cadastrooulogin == 1:
+        criarcadastro()
+        break
+    elif cadastrooulogin == 2:
+        login()
+        break
+    else:
+        print('Escolha uma opção valida')
+while valida == True:
     menu = int(input('O que você deseja fazer hoje: \n 1- Fazer review de um estabelecimento \n 2- Fazer um post na comunidade \n 3- Cadastrar seu próprio estabelecimento \n 4- sair '))
     match menu:
         case 1:
