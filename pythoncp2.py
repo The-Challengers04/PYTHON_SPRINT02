@@ -37,7 +37,7 @@ def login():
             return False
         else:
             tentar_novamente = input('Deseja tentar novamente? (S/N): ')
-            if tentar_novamente.lower() != 's':
+            if tentar_novamente.lower() != 'n':
                 exit()  # Sai do programa se o usuário não quiser tentar novamente
 
 # Função para fazer uma review de um estabelecimento
