@@ -48,6 +48,8 @@ def postcomunidade():
                 print('Postagem concluída')  # Exibe uma mensagem de sucesso
             else:
                 print('Post deletado')  # Exibe uma mensagem informando que o post foi deletado
+        else:
+            print('Escolha uma resposta válida')
     except ValueError:
         print('Opção inválida.')  # Exibe uma mensagem de erro caso ocorra um problema de conversão de tipo
 
