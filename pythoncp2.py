@@ -1,5 +1,7 @@
+#importando a função exit
+from sys import exit
 
-# Função para realizar o login
+# Função para realizar o cadastro
 def criarcadastro():
     nome = input('Digite seu nome: ')  # Solicita o nome do usuário
     sobrenome = input('Digite seu sobrenome: ')  # Solicita o sobrenome do usuário
@@ -14,22 +16,48 @@ def criarcadastro():
         print('Erro ao abrir o arquivo de logins.')  # Exibe uma mensagem de erro caso ocorra um problema ao abrir o arquivo
         validação = True
 
+#função para fazer login
+def login():
+ while True:
+        email = input('Digite seu email: ')  # Solicita o email do usuário
+        senha = input('Digite sua senha: ')  # Solicita a senha do usuário
+
+        try:
+            with open('logins.txt', 'r') as logins:  # Abre o arquivo 'logins.txt' em modo de leitura
+                for linha in logins:
+                    dados = linha.strip().split(' -') # Separa os valores da linha pelo caractere '-'
+                    email_armazenado = dados[2].split(': ')[1] 
+                    senha_armazenada = dados[3].split(': ')[1]
+                    if email == email_armazenado and senha == senha_armazenada: # Verifica se o email e a senha correspondem aos valores encontrados na linha
+                        print('Login realizado com sucesso!')
+                        return True 
+                print('Email ou senha incorretos. Tente novamente.') # Exibe uma mensagem de boas-vindas
+        except IOError:
+            print('Erro ao abrir o arquivo de logins.')  # Exibe uma mensagem de erro caso ocorra um problema ao abrir o arquivo
+            return False
+        else:
+            tentar_novamente = input('Deseja tentar novamente? (S/N): ')
+            if tentar_novamente.lower() != 's':
+                exit()  # Sai do programa se o usuário não quiser tentar novamente
+
 # Função para fazer uma review de um estabelecimento
 def fazerreview():
-    try:
-        nomeEstabelecimento = input('Digite o nome do estabelecimento: ')  # Solicita o nome do estabelecimento
-        locEstabelecimento = input('Digite o endereço do estabelecimento: ')  # Solicita o endereço do estabelecimento
-        notaEstabelecimento = int(input(f'Digite uma nota (de 0 a 5) para a acessibilidade dentro do estabelecimento {nomeEstabelecimento}: '))  # Solicita uma nota de acessibilidade ao estabelecimento
-
-        if notaEstabelecimento >= 4:
-            compartilhar = input('Ficamos felizes em saber disso! Gostaria de compartilhar isso no feed dos seus amigos? Digite 1 para sim e 2 para não: ')  # Pergunta se o usuário deseja compartilhar a review
-            if compartilhar == '1':
-                print('Review compartilhada com sucesso!')  # Exibe uma mensagem de sucesso
-        elif notaEstabelecimento > 5:
-            print('Escolha uma nota de 0 a 5')  # Exibe uma mensagem de erro caso a nota seja maior que 5
-        reviewEstabelecimento = input('Escreva uma review do local para outros usuários: ')  # Solicita uma review do estabelecimento
-    except ValueError:
-        print('Valor inválido para a nota do estabelecimento.')  # Exibe uma mensagem de erro caso ocorra um problema de conversão de tipo
+ 
+    nomeEstabelecimento = input('Digite o nome do estabelecimento: ')  # Solicita o nome do estabelecimento
+    locEstabelecimento = input('Digite o endereço do estabelecimento: ')  # Solicita o endereço do estabelecimento
+    while True:
+        try:
+            notaEstabelecimento = int(input(f'Digite uma nota (de 0 a 5) para a acessibilidade dentro do estabelecimento {nomeEstabelecimento}: '))  # Solicita uma nota de acessibilidade ao estabelecimento
+            if notaEstabelecimento <= 5:
+                compartilhar = input('Ficamos felizes em saber disso! Gostaria de compartilhar isso no feed dos seus amigos? Digite 1 para sim e 2 para não: ')  # Pergunta se o usuário deseja compartilhar a review
+                if compartilhar == '1':
+                    print('Review compartilhada com sucesso!')  # Exibe uma mensagem de sucesso
+                    reviewEstabelecimento = input('Escreva uma review do local para outros usuários: ')  # Solicita uma review do estabelecimento
+                break
+            else:
+                print('Digite um valor válido!')  # Exibe uma mensagem de erro caso a nota seja maior que 5
+        except ValueError:
+            print('Valor inválido para a nota do estabelecimento.')  # Exibe uma mensagem de erro caso ocorra um problema de conversão de tipo
 
 
 # Função para fazer um post na comunidade
@@ -56,7 +84,13 @@ def postcomunidade():
 #função para cadastrar um estabelecimento
 def cadastrarestabelecimento():
     nomeestabelecimento = input('Digite o nome do seu estabelecimento: ')  # Solicita o nome do estabelecimento
-    cnpj = input('Digite seu CNPJ: ')  # Solicita o CNPJ do estabelecimento
+    while True:
+        try:
+            cnpj = int(input('Digite seu CNPJ (Digite apenas números): '))  # Solicita o CNPJ do estabelecimento
+            break
+        except:
+            print('Digite um valor válido!')
+
     localização = input('Digite sua localização: ')  # Solicita a localização do estabelecimento
     resenha = input('Faça uma resenha sobre seu estabelecimento: ')  # Solicita uma resenha sobre o estabelecimento
 
@@ -66,20 +100,6 @@ def cadastrarestabelecimento():
             print('Estabelecimento cadastrado com sucesso!')  # Exibe uma mensagem de sucesso
     except IOError:
         print('Erro ao abrir o arquivo de estabelecimentos.')  # Exibe uma mensagem de erro caso ocorra um problema ao abrir o arquivo
-
-#função para fazer login
-def login():
-    email = input('Digite seu email ')  # Solicita o email do usuário
-    senha = input('Digite sua senha ')  # Solicita a senha do usuário
-    lerlogins = open('logins.txt', 'r')  # Abre o arquivo 'logins.txt' em modo de leitura
-    for linha in lerlogins.readlines():  # Lê cada linha do arquivo
-        valores = linha.split('-')  # Separa os valores da linha pelo caractere '-'
-        if email in valores[3] and senha in valores[4]:  # Verifica se o email e a senha correspondem aos valores encontrados na linha
-            print('bem vindo')  # Exibe uma mensagem de boas-vindas
-        else:
-            print('usuario/senha incorretos')  # Exibe uma mensagem de erro para usuário/senha incorretos
-            exit()
-
 
 print('Seja bem-vindo ao aplicativo Inlui+!')
 while True:
@@ -98,7 +118,7 @@ while True:
 
 while True:
     try:
-        menu = int(input('O que você deseja fazer hoje:\n1- Fazer review de um estabelecimento\n2- Fazer um post na comunidade\n3- Cadastrar seu próprio estabelecimento\n4- sair '))  # Solicita ao usuário a opção desejada no menu
+        menu = int(input('O que você deseja fazer hoje:\n1- Fazer review de um estabelecimento\n2- Fazer um post na comunidade\n3- Cadastrar seu próprio estabelecimento\n4- sair\n'))  # Solicita ao usuário a opção desejada no menu
         match menu:  # Avalia a opção selecionada
             case 1:  # Se a opção for 1
                 fazerreview()  # Chama a função para fazer uma review de um estabelecimento
