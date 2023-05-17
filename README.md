@@ -13,4 +13,4 @@
 
 <br></br>
 
-> #### O projeto consiste em um sistema de cadastro de usuários em Python. Ao entrar, o usuário pode escolher se deseja fazer um cadastro (com IF e While), coloca seu login e senha, com input, que será salvo em um arquivo txt, e pode então fazer uma review de um estabelecimento. 
+> #### O projeto consiste em um sistema de cadastro de usuários e menu em Python. Ao entrar, o usuário pode escolher se deseja fazer login(para usuários já cadastrados - Para isso, checamos no docmento 'logins.txt' se ja existe um cadastro com o email/senha) ou se cadastrar. Depois, o usuário pode escolher entre fazer uma review, fazer um post na comunidade ou cadastrar seu próprio estabelecimento. O projeto conta com estruturas condicionais e de matchcase, while, input de usuários e funções diversas.

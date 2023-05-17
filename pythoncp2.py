@@ -1,3 +1,4 @@
+
 # Função para realizar o login
 def criarcadastro():
     nome = input('Digite seu nome: ')  # Solicita o nome do usuário
@@ -11,6 +12,7 @@ def criarcadastro():
             print('Cadastro realizado com sucesso!')  # Exibe uma mensagem de sucesso
     except IOError:
         print('Erro ao abrir o arquivo de logins.')  # Exibe uma mensagem de erro caso ocorra um problema ao abrir o arquivo
+        validação = True
 
 # Função para fazer uma review de um estabelecimento
 def fazerreview():
@@ -65,8 +67,8 @@ def cadastrarestabelecimento():
 
 #função para fazer login
 def login():
-    email = input('Digite seu email')  # Solicita o email do usuário
-    senha = input('Digite sua senha')  # Solicita a senha do usuário
+    email = input('Digite seu email ')  # Solicita o email do usuário
+    senha = input('Digite sua senha ')  # Solicita a senha do usuário
     lerlogins = open('logins.txt', 'r')  # Abre o arquivo 'logins.txt' em modo de leitura
     for linha in lerlogins.readlines():  # Lê cada linha do arquivo
         valores = linha.split('-')  # Separa os valores da linha pelo caractere '-'
@@ -74,11 +76,13 @@ def login():
             print('bem vindo')  # Exibe uma mensagem de boas-vindas
         else:
             print('usuario/senha incorretos')  # Exibe uma mensagem de erro para usuário/senha incorretos
+            exit()
+
 
 print('Seja bem-vindo ao aplicativo Inlui+!')
 while True:
     try:
-        cadastrooulogin = int(input('Você é novo por aqui? Digite 1 para fazer cadastro e 2 para fazer login'))  # Solicita ao usuário se ele deseja fazer cadastro ou login
+        cadastrooulogin = int(input('Você é novo por aqui? Digite 1 para fazer cadastro e 2 para fazer login '))  # Solicita ao usuário se ele deseja fazer cadastro ou login
         if cadastrooulogin == 1:  # Verifica se a opção é 1 (fazer cadastro)
             criarcadastro()  # Chama a função para realizar o cadastro
             break  # Sai do loop
@@ -92,12 +96,13 @@ while True:
 
 while True:
     try:
-        menu = int(input('O que você deseja fazer hoje:\n1- Fazer review de um estabelecimento\n2- Fazer um post na comunidade\n3- Cadastrar seu próprio estabelecimento\n4- sair'))  # Solicita ao usuário a opção desejada no menu
+        menu = int(input('O que você deseja fazer hoje:\n1- Fazer review de um estabelecimento\n2- Fazer um post na comunidade\n3- Cadastrar seu próprio estabelecimento\n4- sair '))  # Solicita ao usuário a opção desejada no menu
         match menu:  # Avalia a opção selecionada
             case 1:  # Se a opção for 1
                 fazerreview()  # Chama a função para fazer uma review de um estabelecimento
             case 2:  # Se a opção for 2
                 postcomunidade()  # Chama a função para fazer um post na comunidade
+
             case 3:  # Se a opção for 3
                 cadastrarestabelecimento()  # Chama a função para cadastrar um estabelecimento
             case 4:  # Se a opção for 4
