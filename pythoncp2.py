@@ -35,6 +35,7 @@ def login():
         except IOError:
             print('Erro ao abrir o arquivo de logins.')  # Exibe uma mensagem de erro caso ocorra um problema ao abrir o arquivo
             return False
+            exit()
         else:
             tentar_novamente = input('Deseja tentar novamente? (S/N): ')
             if tentar_novamente.lower() != 'n':
@@ -58,7 +59,6 @@ def fazerreview():
                 print('Digite um valor válido!')  # Exibe uma mensagem de erro caso a nota seja maior que 5
         except ValueError:
             print('Valor inválido para a nota do estabelecimento.')  # Exibe uma mensagem de erro caso ocorra um problema de conversão de tipo
-
 
 # Função para fazer um post na comunidade
 def postcomunidade():
